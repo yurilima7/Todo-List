@@ -36,7 +36,7 @@ class UserRepositoryImpl implements UserRepository {
           );
         }
       } else {
-        throw AuthException(message: 'Erro ao criao registar usuário!');
+        throw AuthException(message: 'Erro ao registar usuário!');
       }
     }
   }
