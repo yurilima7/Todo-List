@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list_provider/app/core/notifier/default_listener_notifier.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_list_field.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_list_logo.dart';
@@ -31,25 +34,19 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    context.read<RegisterController>().addListener(() {
-      final controller = context.read<RegisterController>();
-      var success = controller.success;
-      var error = controller.error;
+    final defaultListener = DefaultListenerNotifier(
+        changeNotifier: context.read<RegisterController>());
 
-      if (success) {
-        Navigator.of(context).pop(controller);
-      } else if (error != null && error.isNotEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              error,
-            ),
-
-            backgroundColor: Colors.redAccent,
-          ),
-        );
-      }
-    });
+    defaultListener.listener(
+      context: context,
+      successCallback: (notifier, listenerInstance) {
+        listenerInstance.dispose();
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      },
+      errorCallback: (notifier, listenerInstance) {
+        log('Error');
+      },
+    );
   }
 
   @override
