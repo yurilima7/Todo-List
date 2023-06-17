@@ -41,9 +41,33 @@ class LoginController extends DefaultChangeNotifier {
       await _userService.forgotPassword(email);
       infoMessage = 'Reset de senha enviado para seu e-mail';
     } on AuthException catch (e) {
-        setError(e.message);
+      setError(e.message);
     } catch (e) {
       setError('Erro ao resetar a senha');
+    } finally {
+      hideLoading();
+      notifyListeners();
+    }
+  }
+
+  Future<void> googleLogin() async {
+    try {
+      showLoadingAndResetState();
+      infoMessage = null;
+
+      notifyListeners();
+
+      final user = await _userService.googleLogin();
+
+      if (user != null) {
+        success();
+      } else {
+        _userService.googleLogout();
+        setError('Erro ao realizar login com Google');
+      }
+    } on AuthException catch (e) {
+      _userService.googleLogout();
+      setError(e.message);
     } finally {
       hideLoading();
       notifyListeners();
