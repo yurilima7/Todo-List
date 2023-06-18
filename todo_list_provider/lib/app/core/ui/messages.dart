@@ -13,6 +13,8 @@ class Messages {
 
   void showInfo(String message) => _showMessage(message, context.primaryColor);
 
+  void showSuccess(String message) => _showMessage(message, Colors.greenAccent);
+
   void _showMessage(String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

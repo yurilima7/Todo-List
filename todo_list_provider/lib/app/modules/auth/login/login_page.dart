@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       successCallback: (notifier, listenerInstance) {
-        print('Login feito com sucesso!');
+        Messages.of(context).showSuccess('Login feito com sucesso!');
       },
     );
   }
