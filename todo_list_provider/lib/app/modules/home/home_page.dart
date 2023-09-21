@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_provider/app/core/ui/todo_list_icons.dart';
 import 'package:todo_list_provider/app/modules/home/widgets/home_drawer.dart';
 import 'package:todo_list_provider/app/modules/home/widgets/home_filters.dart';
 import 'package:todo_list_provider/app/modules/home/widgets/home_header.dart';
+import 'package:todo_list_provider/app/modules/home/widgets/home_tasks.dart';
+import 'package:todo_list_provider/app/modules/home/widgets/home_week_filter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,8 +17,10 @@ class HomePage extends StatelessWidget {
         iconTheme: IconThemeData(
           color: context.primaryColor,
         ),
-        backgroundColor: Colors.transparent,
+
+        backgroundColor: const Color(0xFFFAFBFE),
         elevation: 0,
+
         actions: [
           PopupMenuButton(
             icon: const Icon(TodoListIcons.filter),
@@ -32,6 +35,12 @@ class HomePage extends StatelessWidget {
 
       backgroundColor: const Color(0xFFFAFBFE),
       drawer: HomeDrawer(),
+      
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: context.primaryColor,
+        child: const Icon(Icons.add),
+      ),
 
       body: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
@@ -46,9 +55,11 @@ class HomePage extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const HomeHeader(),
-                    const HomeFilters(),
+                  children: const [
+                    HomeHeader(),
+                    HomeFilters(),
+                    HomeWeekFilter(),
+                    HomeTasks(),
                   ],
                 ),
               ),
