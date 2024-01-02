@@ -77,6 +77,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
           'Salvar task',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
       ),

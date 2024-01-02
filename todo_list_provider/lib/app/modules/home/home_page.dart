@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _goToCreateTask(context),
         backgroundColor: context.primaryColor,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.white,),
       ),
 
       body: LayoutBuilder(
