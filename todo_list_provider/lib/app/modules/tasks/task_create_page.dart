@@ -1,20 +1,48 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:todo_list_provider/app/core/notifier/default_listener_notifier.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_list_field.dart';
 import 'package:todo_list_provider/app/modules/tasks/task_create_controller.dart';
 import 'package:todo_list_provider/app/modules/tasks/widgets/calendar_button.dart';
 import 'package:validatorless/validatorless.dart';
 
-class TaskCreatePage extends StatelessWidget {
+class TaskCreatePage extends StatefulWidget {
   final TaskCreateController _controller;
-  final descriptionEC = TextEditingController();
 
-  TaskCreatePage({
+  const TaskCreatePage({
     Key? key,
     required TaskCreateController controller,
   }) : _controller = controller, super(key: key);
 
+  @override
+  State<TaskCreatePage> createState() => _TaskCreatePageState();
+}
+
+class _TaskCreatePageState extends State<TaskCreatePage> {
+  final _descriptionEC = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    DefaultListenerNotifier(
+      changeNotifier: widget._controller,
+    ).listener(
+      context: context,
+      successCallback: (notifier, listenerInstance) {
+        listenerInstance.dispose();
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionEC.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +64,14 @@ class TaskCreatePage extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          final formValid = _formKey.currentState?.validate() ?? false;
+
+          if (formValid) {
+            widget._controller.save(_descriptionEC.text);
+          }
+        },
+
         backgroundColor: context.primaryColor,
         label: const Text(
           'Salvar task',
@@ -47,6 +82,7 @@ class TaskCreatePage extends StatelessWidget {
       ),
 
       body: Form(
+        key: _formKey,
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
 
@@ -67,7 +103,7 @@ class TaskCreatePage extends StatelessWidget {
 
               TodoListField(
                 label: '',
-                controller: descriptionEC,
+                controller: _descriptionEC,
                 validator: Validatorless.required('Descrição é obrigatória'),
               ),
 
