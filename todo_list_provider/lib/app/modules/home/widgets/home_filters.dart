@@ -29,10 +29,7 @@ class HomeFilters extends StatelessWidget {
                         (value) => value.filterSelected) ==
                     TaskFilterEnum.today,
 
-                totalTasksModel: TotalTasksModel(
-                  totalTasks: 10,
-                  totalTasksFinish: 8,
-                ),
+                totalTasksModel: context.select<HomeController, TotalTasksModel?>((controller) => controller.todayTotalTasks),
               ),
 
               TodoCardFilter(
@@ -42,10 +39,7 @@ class HomeFilters extends StatelessWidget {
                         (value) => value.filterSelected) ==
                     TaskFilterEnum.tomorrow,
                                 
-                totalTasksModel: TotalTasksModel(
-                  totalTasks: 10,
-                  totalTasksFinish: 5,
-                ),
+                totalTasksModel: context.select<HomeController, TotalTasksModel?>((controller) => controller.tomorrowTotalTasks),
               ),
 
               TodoCardFilter(
@@ -55,10 +49,7 @@ class HomeFilters extends StatelessWidget {
                         (value) => value.filterSelected) ==
                     TaskFilterEnum.week,
                                 
-                totalTasksModel: TotalTasksModel(
-                  totalTasks: 10,
-                  totalTasksFinish: 5,
-                ),
+                totalTasksModel: context.select<HomeController, TotalTasksModel?>((controller) => controller.weekTotalTasks),
               ),
             ],
           ),
