@@ -41,7 +41,6 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       successCallback: (notifier, listenerInstance) {
         listenerInstance.dispose();
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
       },
       errorCallback: (notifier, listenerInstance) {
         log('Error');
