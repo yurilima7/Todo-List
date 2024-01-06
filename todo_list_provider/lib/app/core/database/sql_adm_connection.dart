@@ -15,7 +15,6 @@ class SqlAdmConnection with WidgetsBindingObserver {
         connection.closeConnection();
         break;
       case AppLifecycleState.hidden:
-        // TODO: Handle this case.
     }
     
     super.didChangeAppLifecycleState(state);
