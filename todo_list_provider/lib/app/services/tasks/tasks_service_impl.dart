@@ -43,4 +43,7 @@ class TasksServiceImpl implements TasksService {
   
   @override
   Future<void> checkOrUncheckTask(TaskModel task) => _tasksRepository.checkOrUncheckTask(task);
+  
+  @override
+  Future<void> deleteTask(int idTask) => _tasksRepository.deleteTask(idTask);
 }

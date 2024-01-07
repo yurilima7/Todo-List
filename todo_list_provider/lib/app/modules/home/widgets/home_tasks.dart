@@ -35,7 +35,49 @@ class HomeTasks extends StatelessWidget {
             children: context
                 .select<HomeController, List<TaskModel>>(
                     (controller) => controller.filteredTasks)
-                .map((t) => Task(taskModel: t,))
+                .map(
+                  (t) => Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+
+                    confirmDismiss: (direction) => showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: const Text('Deseja deletar a task?'),
+
+                        content: const Text('Esta tarefa será deletada'),
+
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: const Text('Cancelar'),
+                          ),
+
+                          TextButton(
+                            onPressed: () {
+                              context.read<HomeController>().deleteTask(t.id);
+                              Navigator.pop(context, false);
+                            },
+                               
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    background: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      
+                      child: const SizedBox(
+                        child: Icon(Icons.delete, color: Colors.redAccent,),
+                      ),
+                    ),
+
+                    child: Task(
+                      taskModel: t,
+                    ),
+                  ),
+                )
                 .toList(),
           )
         ],

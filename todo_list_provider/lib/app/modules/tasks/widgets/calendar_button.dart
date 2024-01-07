@@ -11,6 +11,11 @@ class CalendarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void updateSelectedDate(DateTime? selectedDate) {
+      context.read<TaskCreateController>().selectedDate = selectedDate;
+    }
+
     return InkWell(
       onTap: () async {
         var lastDate = DateTime.now();
@@ -23,7 +28,7 @@ class CalendarButton extends StatelessWidget {
           lastDate: lastDate,
         );
 
-        context.read<TaskCreateController>().selectedDate = selectedDate;
+        updateSelectedDate(selectedDate);
       },
 
       borderRadius: BorderRadius.circular(30),
@@ -57,8 +62,6 @@ class CalendarButton extends StatelessWidget {
                 }
               },
             ),
-            
-            
           ],
         ),
       ),
