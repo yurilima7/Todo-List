@@ -6,4 +6,6 @@ class TotalTasksModel {
     required this.totalTasks,
     required this.totalTasksFinish,
   });
+
+  get totalOpen => totalTasks - totalTasksFinish;
 }

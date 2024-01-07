@@ -57,7 +57,7 @@ class TodoCardFilter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${totalTasksModel?.totalTasks} Tasks',
+              '${totalTasksModel?.totalOpen} Tasks',
               style: context.titleStyle.copyWith(
                 fontSize: 10,
                 color: selected ? Colors.white : Colors.grey,
