@@ -180,7 +180,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("Salvar"),
+                        child: Text(
+                          "Salvar",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -138,7 +138,12 @@ class _LoginPageState extends State<LoginPage> {
 
                                 child: const Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text("Login"),
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
