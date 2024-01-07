@@ -5,4 +5,5 @@ abstract class TasksRepository {
   Future<List<TaskModel>> findByPeriod(DateTime start, DateTime end);
   Future<void> checkOrUncheckTask(TaskModel task);
   Future<void> deleteTask(int idTask);
+  Future<void> deleteAllTasks();
 }

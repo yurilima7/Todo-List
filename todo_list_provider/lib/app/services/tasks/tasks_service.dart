@@ -8,4 +8,5 @@ abstract class TasksService {
   Future<WeekTaskModel> getWeek();
   Future<void> checkOrUncheckTask(TaskModel task);
   Future<void> deleteTask(int idTask);
+  Future<void> deleteAllTasks();
 }
